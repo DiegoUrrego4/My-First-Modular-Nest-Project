@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { v4 as uuid } from 'uuid';
 import { User } from '../interfaces/users.interface';
 import { CreateUserDto } from '../dtos/create-user.dto';
@@ -69,5 +65,10 @@ export class UserService {
 
   partiallyUpdate(uuid: string, updateUserDto: UpdateUserDto) {
     return this.updateDBUser(uuid, updateUserDto);
+  }
+
+  delete(uuid: string) {
+    this.findOneById(uuid);
+    this.users = this.users.filter((user) => user.uuid !== uuid);
   }
 }
