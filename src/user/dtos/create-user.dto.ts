@@ -10,6 +10,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   readonly nombre: string;
 
+  @IsString()
   @IsOptional()
   readonly apellido?: string;
 

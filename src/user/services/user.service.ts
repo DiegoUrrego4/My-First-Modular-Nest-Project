@@ -1,7 +1,12 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { v4 as uuid } from 'uuid';
 import { User } from '../interfaces/users.interface';
 import { CreateUserDto } from '../dtos/create-user.dto';
+import { UpdateUserDto } from '../dtos/update-user.dto';
 
 @Injectable()
 export class UserService {
@@ -47,9 +52,10 @@ export class UserService {
 
   updateDBUser(uuid: string, userToUpdate: User) {
     let existedUser = this.findOneById(uuid);
+
     this.users = this.users.map((user) => {
       if (user.uuid === uuid) {
-        existedUser = { ...userToUpdate, uuid };
+        existedUser = { ...existedUser, ...userToUpdate, uuid };
         return existedUser;
       }
       return user;
@@ -58,6 +64,10 @@ export class UserService {
   }
 
   update(uuid: string, createUserDto: CreateUserDto) {
-    this.updateDBUser(uuid, createUserDto);
+    return this.updateDBUser(uuid, createUserDto);
+  }
+
+  partiallyUpdate(uuid: string, updateUserDto: UpdateUserDto) {
+    return this.updateDBUser(uuid, updateUserDto);
   }
 }
