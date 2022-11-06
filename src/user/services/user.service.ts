@@ -20,7 +20,7 @@ export class UserService {
     {
       uuid: uuid(),
       nombre: 'John',
-      apellido: 'Salazar',
+      apellido: 'Granada',
       email: 'johnSalazar@mail.com',
     },
   ];
@@ -43,5 +43,21 @@ export class UserService {
     };
     this.users.push(newUser);
     return newUser;
+  }
+
+  updateDBUser(uuid: string, userToUpdate: User) {
+    let existedUser = this.findOneById(uuid);
+    this.users = this.users.map((user) => {
+      if (user.uuid === uuid) {
+        existedUser = { ...userToUpdate, uuid };
+        return existedUser;
+      }
+      return user;
+    });
+    return existedUser;
+  }
+
+  update(uuid: string, createUserDto: CreateUserDto) {
+    this.updateDBUser(uuid, createUserDto);
   }
 }

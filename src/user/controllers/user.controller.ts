@@ -12,12 +12,20 @@ export class UserController {
   }
 
   @Get(':uuid')
-  getUser(@Param('uuid') id: string) {
-    return this.usersService.findOneById(id);
+  getUser(@Param('uuid') uuid: string) {
+    return this.usersService.findOneById(uuid);
   }
 
   @Post()
   createUser(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
+  }
+
+  @Put(':uuid')
+  updateUser(
+    @Param('uuid') uuid: string,
+    @Body() createUserDto: CreateUserDto,
+  ) {
+    return this.usersService.update(uuid, createUserDto);
   }
 }
