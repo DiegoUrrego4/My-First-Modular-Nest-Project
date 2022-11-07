@@ -20,6 +20,11 @@ export class UserController {
     return this.usersService.findAll();
   }
 
+  @Get('message')
+  getSaludo() {
+    return this.usersService.getSaludo();
+  }
+
   @Get(':uuid')
   getUser(@Param('uuid') uuid: string) {
     return this.usersService.findOneById(uuid);

@@ -26,6 +26,10 @@ export class UserService {
     },
   ];
 
+  getSaludo() {
+    return 'Hola desde users Service';
+  }
+
   findAll(): User[] {
     return this.users;
   }
