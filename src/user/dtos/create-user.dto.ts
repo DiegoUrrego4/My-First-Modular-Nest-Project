@@ -1,4 +1,10 @@
-import { IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  IsUUID,
+} from 'class-validator';
 
 export class CreateUserDto {
   @IsString()
@@ -14,7 +20,7 @@ export class CreateUserDto {
   @IsOptional()
   readonly apellido?: string;
 
-  @IsString()
+  @IsEmail()
   @IsNotEmpty()
   readonly email: string;
 }
