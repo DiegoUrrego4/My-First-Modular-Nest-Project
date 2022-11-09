@@ -55,6 +55,7 @@ export class UsersService {
   }
 
   remove(uuid: string) {
-    return `This action removes a #${uuid} user`;
+    this.findOne(uuid);
+    this.users = this.users.filter((user) => user.uuid !== uuid);
   }
 }

@@ -7,10 +7,18 @@ import {
 import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { RequestMiddleware } from './middlewares/request.middleware';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './auth/auth.guard';
 
 @Module({
   controllers: [UsersController],
-  providers: [UsersService],
+  providers: [
+    UsersService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+  ],
 })
 export class UsersModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
