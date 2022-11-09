@@ -1,6 +1,6 @@
 export interface UserInterface {
   uuid?: string;
   name: string;
-  lastname?: string;
+  lastname?: string | null;
   email: string;
 }
